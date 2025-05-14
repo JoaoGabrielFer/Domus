@@ -7,7 +7,9 @@ def home():
     if request.method == "POST":
         nome = request.form.get("nome")
         with open("website/db.txt", "a") as f:
-           f.write(nome)
+           f.write(f"{nome}\n")
+    else:
+        nome = ""
     return render_template("home.html", nome=nome)
 
 
