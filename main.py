@@ -1,18 +1,6 @@
-from flask import Flask, request
-from flask_restful import Api, Resource
+from website import create_app
 
-app = Flask(__name__)
-api = Api(app)
-
-class Teste(Resource):
-    def get(self, name):
-        return {"data": name}
-    
-    def put(self, name):
-        print(request.form["likes"])
-        return {}
-    
-api.add_resource(Teste, "/<string:name>")
+app = create_app()
 
 if __name__ == "__main__":
     app.run(debug=True)
