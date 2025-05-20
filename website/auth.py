@@ -15,6 +15,15 @@ def login():
 def logout():
     return ""
 
-@auth.route("/sign-up")
-def sign_up():
+@auth.route("/sign-up", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        email = request.form.get("email")
+        senha = request.form.get("senha1") if request.form.get("senha1") == request.form.get("senha2") else None
+        condoid = request.form.get("condoid")
+        if senha != None:
+            with open("website/db.txt", "a") as f:
+                f.write(f"{email} {senha} {condoid}\n")
+        else:
+            pass
     return render_template("sign_up.html")

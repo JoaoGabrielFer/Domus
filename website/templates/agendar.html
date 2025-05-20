@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Local</th>
+            <th>Hora de início</th>
+            <th>Hora de finalização</th>
+        </tr>
+        {% for row in db %}
+        <tr>
+            {% for item in row %}
+            <td>{{ item }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    
+    <form method="post">
+        <label for="local">Local para agendar: </label>
+        <select name="local" id="local">
+            <option value="piscina">Piscina</option>
+            <option value="salaodefesta">Salão de Festas</option>
+            <option value="quadra">Quadra</option>
+        </select>
+        <br>
+        <label for="hora">Horário de inicio:</label>
+        <input type="datetime-local" name="hora" id="hora">
+        <label for="horafinal">Horário final:</label>
+        <input type="datetime-local" name="horafinal" id="horafinal">
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
