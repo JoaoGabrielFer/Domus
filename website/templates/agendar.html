@@ -1,47 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='agendar.css') }}">
-    <link rel="icon" type="image/x-icon" href="static/assets/favicon.png">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.png') }}">
     <script src="https://kit.fontawesome.com/1ee3e0487f.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <a href="{{ url_for('views.home')}}"><img class="home-button" src="static/assets/logo-domus-cinza.png" alt=""></a>
-    <a href="{{ url_for('views.agendar')}}"><i class="fa-solid fa-rotate-right reload"></i></a>
+    <a href="{{ url_for('views.home') }}"><img class="home-button" src="{{ url_for('static', filename='assets/logo-domus-cinza.png') }}" alt="Página Inicial"></a>
+    <div class="table-header">
+	<h1>Agendamentos Ativos</h1>
+	<a href="{{ url_for('views.agendar') }}"><i class="fa-solid fa-rotate-right reload"></i></a>
+    </div>
+    
     <table>
-	<tr>
-	    <th>Local</th>
-	    <th>Hora de início</th>
-	    <th>Hora de finalização</th>
-	</tr>
-	{% for row in db %}
-	<tr>
-	{% for item in row %}
-	<td>{{ item }}</td>
-	{% endfor %}
-	</tr>
-	{% endfor %}
+        <thead>
+            <tr>
+                <th>Local</th>
+                <th>Hora de Início</th>
+                <th>Hora de Finalização</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for agendamento in db %}
+            <tr>
+                <td>{{ agendamento.local }}</td>
+                <td>{{ agendamento.inicio.strftime('%d/%m/%Y às %H:%M') }}</td>
+                <td>{{ agendamento.fim.strftime('%d/%m/%Y às %H:%M') }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3" style="text-align: center;">Não há agendamentos futuros.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
+    <hr>
 
-
+    <h2>Fazer Novo Agendamento</h2>
+    
     <form method="post">
-	<label for="local">Local para agendar: </label>
-	<select name="local" id="local">
-	    <option value="piscina">Piscina</option>
-	    <option value="salaodefesta">Salão de Festas</option>
-	    <option value="quadra">Quadra</option>
-	</select>
-	<br>
-	<label for="hora">Horário de inicio:</label>
-	<input type="datetime-local" name="hora" id="hora">
-	<label for="horafinal">Horário final:</label>
-	<input type="datetime-local" name="horafinal" id="horafinal">
-	<br>
-	<button type="submit">Enviar</button>
+        <label for="local">Local para agendar:</label>
+        <select name="local" id="local" required>
+            <option value="piscina">Piscina</option>
+            <option value="salaodefesta">Salão de Festas</option>
+            <option value="quadra">Quadra</option>
+        </select>
+        <br>
+        <label for="hora">Horário de início:</label>
+        <input type="datetime-local" name="hora" id="hora" required>
+        <label for="horafinal">Horário final:</label>
+        <input type="datetime-local" name="horafinal" id="horafinal" required>
+        <br>
+        <button type="submit">Enviar</button>
     </form>
 </body>
 </html>

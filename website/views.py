@@ -1,14 +1,13 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from datetime import datetime
-tks = []
-
-with open("website/db.txt", "r") as f:
-    for line in f:
-        tks.append(line.split())
-
-        
 
 views = Blueprint("views", __name__)
+
+NICE_NAMES = {
+    "piscina": "Piscina",
+    "salaodefesta": "Salão de Festas",
+    "quadra": "Quadra"
+}
 
 @views.route("/", methods=["GET"])
 def home():
@@ -23,27 +22,38 @@ def agendar():
         if local and hora and horafinal:
             with open("website/db.txt", "a") as f:
                 f.write(f"{local} {hora} {horafinal}\n")
-    
-    tks = []
+        return redirect(url_for('views.agendar'))
+
+    future_events = []
     updated_lines = []
     now = datetime.now()
 
-    with open("website/db.txt", "r") as f:
-        for line in f:
-            parts = line.strip().split()
-            if len(parts) == 3:
-                local, hora_inicio, hora_fim = parts
-                try:
-                    hora_fim_dt = datetime.fromisoformat(hora_fim)
-                    if hora_fim_dt > now:
-                        tks.append(parts)
-                        updated_lines.append(line)
-                except ValueError:
-                    continue  
+    try:
+        with open("website/db.txt", "r") as f:
+            for line in f:
+                parts = line.strip().split()
+                if len(parts) == 3:
+                    try:
+                        hora_fim_dt = datetime.fromisoformat(parts[2])
+                        if hora_fim_dt > now:
+                            future_events.append(parts)
+                            updated_lines.append(line)
+                    except ValueError:
+                        continue
+    except FileNotFoundError:
+        open("website/db.txt", "w").close()
 
     with open("website/db.txt", "w") as f:
         f.writelines(updated_lines)
 
-    return render_template("agendar.html", db=tks)
+    processed_schedules = []
+    for event in future_events:
+        local, inicio_str, fim_str = event
+        schedule = {
+            "local": NICE_NAMES.get(local, local.capitalize()),
+            "inicio": datetime.fromisoformat(inicio_str),
+            "fim": datetime.fromisoformat(fim_str)
+        }
+        processed_schedules.append(schedule)
 
-
+    return render_template("agendar.html", db=processed_schedules)

@@ -89,7 +89,19 @@ button:hover {
 .home-button{
     height: 100px;
 }
-.reload{
-    transform: translate(1430px, 32px);
-    color: white;
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.table-header h1 {
+    margin: 0;
+}
+
+.reload {
+    color: #333;
+    font-size: 1.2em;
+    margin-left: 1em;
 }
