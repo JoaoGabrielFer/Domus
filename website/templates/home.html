@@ -4,10 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="icon" type="image/x-icon" href="static/assets/favicon.png">
 </head>
 <body>
-    <a href="/login"><button>Login</button></a>
-    <a href="/sign-up"><button>Sign Up</button></a>
-    <a href="/agendar"><button>Agendar</button></a>
+     <div class="logo-container">
+        <img src="static/assets/logo-domus-cinza.png" class="img-logo" alt="Logo Domus">
+    </div>
+
+    <div class="button-group">
+        <a href="/login"><button>Login</button></a>
+        <a href="/sign-up"><button>Sign Up</button></a>
+        <a href="/agendar"><button>Agendar</button></a>
+    </div>
 </body>
 </html>

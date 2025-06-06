@@ -4,15 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="icon" type="image/x-icon" href="static/assets/favicon.png">
 </head>
 <body>
-    <form method="post">
-        <label for="email">email: </label>
-        <input type="email", id="email", name="email", placeholder="insira seu email">
-	<br/>
-	    <label for="senha">senha: </label>
-        <input type="senha", id="senha", name="senha", placeholder="insira sua senha">
-        <button type="submit">enviar</button>
-    </form>
+    <header>
+    <a href="{{ url_for('views.home')}}">
+	<img src="static/assets/logo-domus-cinza.png" class="home-button" alt="">
+    </a>
+    <h1 class="headerh1">Bem-Vindo ao Domus</h1>
+    </header>
+
+    <div class="container">
+        <h2 style="color: white;">Domus</h2>
+        <form>
+            <label style="color:white ;" for="email">E-mail:</label>
+            <input  type="email" id="email" placeholder="Digite seu e-mail">
+
+            <label style="color: white;" for="senha">Senha:</label>
+            <input type="password" id="senha" placeholder="Digite sua senha">
+
+            <button class="botao-login" style="color: black;">Entrar</button>
+        </form>
+    </div>
+    <footer>
+        Domus
+    </footer>
 </body>
 </html>

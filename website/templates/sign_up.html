@@ -4,21 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="icon" type="image/x-icon" href="static/assets/favicon.png">
 </head>
 <body>
-    <form method="post">
-        <label for="email">Email: </label>
-        <input type="email", id="email", name="email", placeholder="insira seu email">
-        <br/>
-	    <label for="senha1">Senha: </label>
-        <input type="password", id="senha1", name="senha1", placeholder="insira sua senha">
-        <br>
-	    <label for="senha2">Confirme sua senha: </label>
-        <input type="password", id="senha2", name="senha2", placeholder="confirme sua senha">
-        <br>
-	    <label for="condoid">Insira o id do seu condominio: </label>
-        <input type="number", id="condoid", name="condoid", placeholder="id do condominio">
-        <button type="submit">Enviar</button>
-    </form>
+    <header>
+    <a href="{{ url_for('views.home')}}"><img class="home-button"src="static/assets/logo-domus-cinza.png" alt=""></a>
+    <h1 class="headerh1">Bem-Vindo ao Domus</h1>
+    </header>
+     <div class="container">
+        <form method="post">
+            <label style="color: white;" for="email">Email: </label>
+            <input type="email", id="email", name="email", placeholder="insira seu email">
+            <br/>
+	        <label style="color: white;" for="senha1">Senha: </label>
+            <input type="password", id="senha1", name="senha1", placeholder="insira sua senha">
+            <br>
+	        <label style="color: white;" for="senha2">Confirme sua senha: </label>
+            <input type="password", id="senha2", name="senha2", placeholder="confirme sua senha">
+            <br>
+	        <label style="color: white;" for="condoid">Insira o id do seu condominio: </label>
+            <input type="number", id="condoid", name="condoid", placeholder="id do condominio">
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+<footer>
+     Domus
+</footer>
 </body>
 </html>
